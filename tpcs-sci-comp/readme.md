@@ -2,4 +2,5 @@
 Landing page for MATH 3001 course files and notes
 
 Directory:
+* [Homework](hw)
 * [JuliaBox](juliabox)
