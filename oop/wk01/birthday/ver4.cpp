@@ -39,7 +39,7 @@ int main() {
   cin >> birth.month;
 
   // Call print output function which determines if birthday or not
-	print_output(birth); // what do you pass? Look at function definition
+	today.print_output(birth); // what do you pass? Look at function definition
 
   return 0;
 }
@@ -48,6 +48,6 @@ void Date::print_output(Date birth) {
   string note;
 
   // Determine if today is birthday or not
-  note = ((today.day == birth.day) && (today.month == birth.month))?"Happy Birthday!":"Happy UnBirthday!";
+  note = ((day == birth.day) && (month == birth.month))?"Happy Birthday!":"Happy UnBirthday!";
   cout << note << endl;
 }
