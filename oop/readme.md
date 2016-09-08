@@ -4,5 +4,5 @@ Landing page for CSC 3500 course files and notes
 **Directory**:  
 [Assignments](assignments)
 * [Week 1](wk01) - Introduction to OOP
- * [BirthdayUnBirthday](birthday)
- * [Swap Function w/ 3 chars](swap3x)
+ * [BirthdayUnBirthday](wk01/birthday)
+ * [Swap Function w/ 3 chars](wk01/swap3x)
