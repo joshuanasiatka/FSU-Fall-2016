@@ -13,7 +13,22 @@ template<class T>
 void swap(T&x, T&y, T&z);
 
 int main() {
-  int i=3, j=4, k=5;
+  char i,j,k;
+
+  // Take input for variable i
+  cout << "Enter a character for i: ";
+  cin >> i;
+  cout << endl;
+
+  // Take input for variable j
+  cout << "Enter a character for j: ";
+  cin >> j;
+  cout << endl;
+
+  // Take input for variable k
+  cout << "Enter a character for k: ";
+  cin >> k;
+  cout << endl;
 
   cout << i << " " << j << " " << k << endl;
   swap(i,j,k);
