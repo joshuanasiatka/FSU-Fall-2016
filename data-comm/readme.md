@@ -2,4 +2,5 @@
 Landing page for CSC 3400 course files and notes
 
 **Directory**:  
-*(coming soon)*
+Notes:
+* [Chapter 02](notes/ch02.md)
