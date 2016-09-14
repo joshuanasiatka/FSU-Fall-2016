@@ -1,9 +1,7 @@
-# Homework for SciComp
+# Homework
 
 In-Progress:  
-Homework 1 - [Problem Set](hw01.pdf) or [Solution](#)
+(nothing at the moment)
 
 Completed:  
-(nothing yet)
-
-*the structure of this directory will most likely change as contents grow*
+Homework 1 - [Problem Set](hw01.pdf) or [Solution](hw01.ipynb)
