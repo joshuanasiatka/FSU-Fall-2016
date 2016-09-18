@@ -20,11 +20,11 @@ function all_factors(n::BigInt)
   factors
 end
 
-function is_prime(n::Integer)
+function is_prime(n::BigInt)
   length(all_factors(n))==2?true:false
 end
 
-function next_prime(n::Integer)
+function next_prime(n::BigInt)
   for i=n+1:2n
     if is_prime(i)
       return i
