@@ -32,7 +32,7 @@ function next_prime(n::BigInt)
   end
 end
 
-function list_primes(start::Integer, finish::Integer)
+function list_primes(start::BigInt, finish::BigInt)
     x=[]
     for i=start:finish
         if is_prime(i)
