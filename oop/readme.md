@@ -6,3 +6,5 @@ Landing page for CSC 3500 course files and notes
  * [Swap Function w/ 3 chars](wk01/swap3x)
 * [Week 2](wk02) - Vectors
  * [Least Common Subsequence](lcs) (LCS)
+* [Week 3](wk03) - First Project
+ * [Gradebook](wk03)
