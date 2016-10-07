@@ -31,6 +31,7 @@ using namespace std;
 //typedef vector<Student> students;
 vector<string> split(const string &s, char delim);
 void split(const string &s, char delim, vector<string> &elems);
+// void saveGradebook(vector<Student> students);
 void printInfo();
 
 class Student {
@@ -41,6 +42,7 @@ public:
   string homestate; // State
   int age;          // Age
   double avg_grade; // Average Grade
+  vector<int> grades; // Grades
 
   void publish() {
     ofstream gradebook;
@@ -54,6 +56,8 @@ public:
   }
 };
 
+void saveGradebook(vector<Student> students);
+
 class GradeManager {
 public:
   void menu() {
@@ -66,17 +70,26 @@ public:
   }
   void parseStudentInfo(string line, Student *s1) {
     char delim = ',';
+    int gradeCount = 0;
 
     vector<string> studentInfo;
+    vector<int> grades;
     studentInfo = split(line, delim);
 
     if (line != "") {
+      gradeCount = studentInfo.size()-6;
       s1->fname = studentInfo[0];
       s1->lname = studentInfo[1];
       s1->hometown = studentInfo[2];
       s1->homestate = studentInfo[3];
       istringstream(studentInfo[4]) >> s1->age;
       istringstream(studentInfo[5]) >> s1->avg_grade;
+      for (int i = 6; i < studentInfo.size(); i++) {
+        // cout << studentInfo[i] << endl;
+        grades.push_back(studentInfo[i]);
+      }
+      if (gradeCount > 0)
+        s1->grades = grades;
     }
   }
 };
@@ -139,23 +152,22 @@ int main() {
       oldGradebook.close();
       cout << "Imported " << students.size() << " record(s)." << endl;
     } else if (choice == 4) {
-      cout << "Saving Gradebook" << endl;
-      const int studentCount = students.size();
-
-      ofstream newGradebook;
-      newGradebook.open("gradebook.txt");
-      newGradebook << "fname,lname,hometown,homestate,age,avg_grade" << endl;
-      newGradebook.close();
-
-      for (int i = 0; i < studentCount; i++) {
-        students[i].publish();
-      }
+      saveGradebook(students);
     } else if (choice == 0) {
-      cout << "Do you want to save? [y/n] ";
+      cout << "Do you want to save? [Y/n] ";
       char j;
       cin >> j;
       if ((j == 'n') || (j == 'N'))
         running = 0;
+      else if ((j == 'y') || (j == 'Y')) {
+        saveGradebook(students);
+        running = 0;
+      }
+      else {
+        cout << "Invalid option, using default" << endl;
+        saveGradebook(students);
+        running = 0;
+      }
     } else {
       cout << "Invalid menu item." << endl;
     }
@@ -172,6 +184,20 @@ void printInfo() {
   cout << "Joshua Nasiatka" << endl;
   cout << "----------------------" << endl;
   cout << endl;
+}
+
+void saveGradebook(vector<Student> students) {
+  cout << "Saving Gradebook" << endl;
+  const int studentCount = students.size();
+
+  ofstream newGradebook;
+  newGradebook.open("gradebook.txt");
+  newGradebook << "fname,lname,hometown,homestate,age,avg_grade" << endl;
+  newGradebook.close();
+
+  for (int i = 0; i < studentCount; i++) {
+    students[i].publish();
+  }
 }
 
 // From: http://stackoverflow.com/questions/236129/split-a-string-in-c
