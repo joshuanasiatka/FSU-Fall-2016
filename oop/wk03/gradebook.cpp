@@ -6,13 +6,13 @@
  * in a gradebook.txt file. Upon re-executing the program, import the information
  * from that text file.
  *
- * Version: 2016.09.27.1
+ * Version: 2016.10.07.2
  *
  * TO-DO:
- * - Select Student
- * - Add Grade
- * - Average Grades
- * - Print Student Report (full details, grades, average)
+ * - Select Student [done]
+ * - Add Grade [done]
+ * - Average Grades [done]
+ * - Print Student Report (full details, grades, average) [done]
  * - Delete Student
  *
  * Copyright (C) 2016 Joshua Nasiatka.
@@ -28,10 +28,9 @@
 using namespace std;
 
 //Typedefs
-//typedef vector<Student> students;
 vector<string> split(const string &s, char delim);
+void printCol(string x);
 void split(const string &s, char delim, vector<string> &elems);
-// void saveGradebook(vector<Student> students);
 void printInfo();
 
 class Student {
@@ -44,16 +43,12 @@ public:
   double avg_grade; // Average Grade
   vector<int> grades; // Grades
 
-  void publish() {
-    ofstream gradebook;
-    gradebook.open("gradebook.txt", ios::out | ios::app );
-    gradebook << fname << "," << lname << "," << hometown << "," << homestate << "," << age << "," << avg_grade << endl;
-    gradebook.close();
-  }
-
-  void printInfo() {
-    cout << fname << "\t" << lname << "\t" << hometown << "\t" << homestate << "\t" << age << "\t" << avg_grade << endl;
-  }
+  void report();
+  void publish();
+  void pubGrades(ofstream &gradebook);
+  void printInfo();
+  void addGrade();
+  double getAvg(vector<int> avg);
 };
 
 void saveGradebook(vector<Student> students);
@@ -63,35 +58,13 @@ public:
   void menu() {
     cout << "--- MENU ---" << endl;
     cout << "[1] List Students" << endl;
-    cout << "[2] Add Student" << endl;
-    cout << "[3] Open GradeBook" << endl;
-    cout << "[4] Save to File" << endl;
+    cout << "[2] Student Report" << endl;
+    cout << "[3] Add Student" << endl;
+    cout << "[4] Open GradeBook" << endl;
+    cout << "[5] Save to File" << endl;
     cout << "[0] Quit" << endl;
   }
-  void parseStudentInfo(string line, Student *s1) {
-    char delim = ',';
-    int gradeCount = 0;
-
-    vector<string> studentInfo;
-    vector<int> grades;
-    studentInfo = split(line, delim);
-
-    if (line != "") {
-      gradeCount = studentInfo.size()-6;
-      s1->fname = studentInfo[0];
-      s1->lname = studentInfo[1];
-      s1->hometown = studentInfo[2];
-      s1->homestate = studentInfo[3];
-      istringstream(studentInfo[4]) >> s1->age;
-      istringstream(studentInfo[5]) >> s1->avg_grade;
-      for (int i = 6; i < studentInfo.size(); i++) {
-        // cout << studentInfo[i] << endl;
-        grades.push_back(studentInfo[i]);
-      }
-      if (gradeCount > 0)
-        s1->grades = grades;
-    }
-  }
+  void parseStudentInfo(string line, Student *s1);
 };
 
 int main() {
@@ -113,12 +86,27 @@ int main() {
       if (students.size() < 1) {
         cout << "Sorry. No records found." << endl;
       } else {
-        cout << "First\tLast\tTown\tState\tAge\tAvgGrade" << endl;
+        cout << "ID\t\tFirst\t\tLast\t\tTown\t\tState\t\tAge\t\tAvgGrade" << endl;
+        cout << "--------\t--------\t--------\t--------\t--------\t--------\t--------" << endl;
         for (int j = 0; j < students.size(); j++) {
+          cout << j+1 << "\t\t";
           students[j].printInfo();
         }
       }
     } else if (choice == 2) {
+      if (students.size() < 1) {
+        cout << "Sorry. No records found." << endl;
+      } else {
+        int i;
+        cout << "Enter Student ID: ";
+        cin >> i;
+        if ((i > students.size()) || (i < 1)) {
+          cout << "Student ID does not exist." << endl;
+        } else {
+          students[i-1].report();
+        }
+      }
+    } else if (choice == 3) {
       // Add Student
       cout << "ADD STUDENT" << endl;
       cout << "-----------" << endl;
@@ -133,11 +121,9 @@ int main() {
       cin >> s1.homestate;
       cout << "Age: ";
       cin >> s1.age;
-      cout << "Average Grade: ";
-      cin >> s1.avg_grade;
       students.push_back(Student(s1));
       cout << endl << "Successfully added 1 record." << endl;
-    } else if (choice == 3) {
+    } else if (choice == 4) {
       // Import Gradebook
       cout << "Importing gradebook from file..." << endl;
       students.clear();
@@ -151,7 +137,7 @@ int main() {
       }
       oldGradebook.close();
       cout << "Imported " << students.size() << " record(s)." << endl;
-    } else if (choice == 4) {
+    } else if (choice == 5) {
       saveGradebook(students);
     } else if (choice == 0) {
       cout << "Do you want to save? [Y/n] ";
@@ -177,6 +163,105 @@ int main() {
   return 0;
 }
 
+// STUDENT CLASS FUNCTIONS
+void Student::report() {
+  cout << "First Name:    " << fname << endl;
+  cout << "Last Name:     " << lname << endl;
+  cout << "Hometown:      " << hometown << endl;
+  cout << "State:         " << homestate << endl;
+  cout << "Age:           " << age << endl;
+  cout << "Average Grade: " << getAvg(grades) << endl;
+  cout << "\n---------------\nLIST OF GRADES\n---------------" << endl;
+
+  const int grade_count = grades.size();
+  for (int j=0; j < grade_count-1; j++) {
+    cout << "Grade " << j+1 << ": " << grades[j] << endl;
+  }
+  cout << "Grade " << grade_count << ": " << grades[grade_count-1] << endl;
+  cout << endl;
+
+  char g;
+  cout << "Do you want to add a grade? [Y/n] ";
+  cin >> g;
+  if ((g == 'Y') || (g == 'y')) {
+    cout << "Type '#' to stop\n" << endl;
+    addGrade();
+  }
+}
+
+void Student::publish() {
+  ofstream gradebook;
+  gradebook.open("gradebook.txt", ios::out | ios::app );
+  gradebook << fname << "," << lname << "," << hometown << "," << homestate << "," << age << "," << avg_grade << ",";
+  Student::pubGrades(gradebook);
+  gradebook << endl;
+  gradebook.close();
+}
+
+void Student::pubGrades(ofstream &gradebook) {
+  const int grade_count = grades.size();
+  for (int j=0; j < grade_count-1; j++) {
+    gradebook << grades[j] << ",";
+  }
+  gradebook << grades[grade_count-1];
+}
+
+void Student::printInfo() {
+  printCol(fname);
+  printCol(lname);
+  printCol(hometown);
+  printCol(homestate);
+  cout << age << "\t\t" << getAvg(grades) << endl;
+}
+
+void Student::addGrade() {
+  string g;
+  while (g != "#") {
+    cout << "Enter Grade: ";
+    cin >> g;
+    if (g != "#")
+      grades.push_back(stoi(g));
+  }
+  cout << "Task completed." << endl;
+  cout << "\nNew Average: " << getAvg(grades) << endl;
+}
+
+double Student::getAvg(vector<int> avg) {
+  double average,sum=0;
+  const double grade_count=avg.size();
+  for (int i=0; i < grade_count; i++) {
+    sum+=avg[i];
+  }
+  average=sum/grade_count;
+  return average;
+}
+
+// GRADE MANAGER CLASS FUNCTIONS
+void GradeManager::parseStudentInfo(string line, Student *s1) {
+  char delim = ',';
+  int gradeCount = 0;
+
+  vector<string> studentInfo;
+  vector<int> grades;
+  studentInfo = split(line, delim);
+
+  if (line != "") {
+    gradeCount = studentInfo.size()-6;
+    s1->fname = studentInfo[0];
+    s1->lname = studentInfo[1];
+    s1->hometown = studentInfo[2];
+    s1->homestate = studentInfo[3];
+    istringstream(studentInfo[4]) >> s1->age;
+    istringstream(studentInfo[5]) >> s1->avg_grade;
+    for (int i = 6; i < studentInfo.size(); i++) {
+      grades.push_back(stoi(studentInfo[i]));
+    }
+    if (gradeCount > 0)
+      s1->grades = grades;
+  }
+}
+
+// GLOBAL FUNCTIONS
 void printInfo() {
   cout << "----------------------" << endl;
   cout << "GradeBook Manager" << endl;
@@ -200,6 +285,14 @@ void saveGradebook(vector<Student> students) {
   }
 }
 
+void printCol(string x) {
+  if (((7 >= x.length()) && (x.length() >= 4)) || (x.length() == 2)) {
+    cout << x << "\t\t";
+  } else {
+    cout << x << "\t";
+  }
+}
+
 // From: http://stackoverflow.com/questions/236129/split-a-string-in-c
 void split(const string &s, char delim, vector<string> &elems) {
     stringstream ss;
@@ -215,4 +308,5 @@ vector<string> split(const string &s, char delim) {
     split(s, delim, elems);
     return elems;
 }
+
 // End
