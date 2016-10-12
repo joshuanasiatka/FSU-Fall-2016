@@ -1,10 +1,11 @@
 # Object-Oriented Programming (CSC 3500)
 Landing page for CSC 3500 course files and notes
 
-* [Week 1](wk01) - Introduction to OOP
- * [BirthdayUnBirthday](wk01/birthday)
- * [Swap Function w/ 3 chars](wk01/swap3x)
-* [Week 2](wk02) - Vectors
- * [Least Common Subsequence](lcs) (LCS)
-* [Week 3](wk03) - First Project
- * [Gradebook](wk03)
+**Projects:**  
+* Introduction to OOP
+ * [BirthdayUnBirthday](projects/birthday)
+ * [Swap Function w/ 3 chars](projects/swap3x)
+* Vectors
+ * [Least Common Subsequence](projects/lcs) (LCS)
+* First Object-Oriented Project
+ * [Gradebook](projects/gradebook)
