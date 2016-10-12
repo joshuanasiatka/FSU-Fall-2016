@@ -1,4 +1,4 @@
-module the_max
+module MaxPackage
 export the_max
 
 function the_max(x::Number,y::Number)
