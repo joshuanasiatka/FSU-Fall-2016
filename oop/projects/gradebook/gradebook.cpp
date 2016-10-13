@@ -6,7 +6,7 @@
  * in a gradebook.txt file. Upon re-executing the program, import the information
  * from that text file.
  *
- * Version: 2016.10.07.2
+ * Version: 2016.10.12.1
  *
  * TO-DO:
  * - Select Student [done]
@@ -14,6 +14,7 @@
  * - Average Grades [done]
  * - Print Student Report (full details, grades, average) [done]
  * - Delete Student
+ * - Delete Grade
  *
  * Copyright (C) 2016 Joshua Nasiatka.
  *--------------------------------------------------------------------------------------
@@ -43,11 +44,14 @@ public:
   double avg_grade; // Average Grade
   vector<int> grades; // Grades
 
+  void listGrades();
   void report();
   void publish();
   void pubGrades(ofstream &gradebook);
+  void printReportMenu();
   void printInfo();
   void addGrade();
+  void removeGrade();
   double getAvg(vector<int> avg);
 };
 
@@ -125,18 +129,22 @@ int main() {
       cout << endl << "Successfully added 1 record." << endl;
     } else if (choice == 4) {
       // Import Gradebook
-      cout << "Importing gradebook from file..." << endl;
-      students.clear();
       ifstream oldGradebook("gradebook.txt");
-      string skip, line;
-      getline(oldGradebook, skip);
-      while (getline(oldGradebook, line)) {
-        Student s1;
-        GradeManager.parseStudentInfo(line, &s1);
-        students.push_back(Student(s1));
+      if (!oldGradebook)
+        cout << "No saved gradebooks." << endl;
+      else {
+        cout << "Importing gradebook from file..." << endl;
+        students.clear();
+        string skip, line;
+        getline(oldGradebook, skip);
+        while (getline(oldGradebook, line)) {
+          Student s1;
+          GradeManager.parseStudentInfo(line, &s1);
+          students.push_back(Student(s1));
+        }
+        oldGradebook.close();
+        cout << "Imported " << students.size() << " record(s)." << endl;
       }
-      oldGradebook.close();
-      cout << "Imported " << students.size() << " record(s)." << endl;
     } else if (choice == 5) {
       saveGradebook(students);
     } else if (choice == 0) {
@@ -172,26 +180,48 @@ void Student::report() {
   cout << "Age:           " << age << endl;
   cout << "Average Grade: " << getAvg(grades) << endl;
   cout << "\n---------------\nLIST OF GRADES\n---------------" << endl;
-
-  const int grade_count = grades.size();
-  for (int j=0; j < grade_count-1; j++) {
-    cout << "Grade " << j+1 << ": " << grades[j] << endl;
-  }
-  cout << "Grade " << grade_count << ": " << grades[grade_count-1] << endl;
-  cout << endl;
+  listGrades();
 
   char g;
-  cout << "Do you want to add a grade? [Y/n] ";
-  cin >> g;
-  if ((g == 'Y') || (g == 'y')) {
-    cout << "Type '#' to stop\n" << endl;
-    addGrade();
+
+  while (g != '#') {
+    printReportMenu();
+    cout << "Choice? ";
+    cin >> g;
+    if (g == '1')       // Add a grade
+      addGrade();
+    else if (g == '2')  // Remove a grade
+      removeGrade();
+    else if (g != '#')
+      cout << "Invalid menu entry." << endl;
   }
+}
+
+void Student::listGrades() {
+  const int grade_count = grades.size();
+  if (grade_count > 0) {
+    for (int j=0; j < grade_count-1; j++) {
+      cout << "Grade " << j+1 << ": " << grades[j] << endl;
+    }
+    cout << "Grade " << grade_count << ": " << grades[grade_count-1] << endl;
+    cout << endl;
+  } else {
+    cout << "No grades recorded.\n" << endl;
+  }
+}
+
+void Student::printReportMenu() {
+  cout << "--- MENU ---\n" << endl;
+  cout << "[1] Add a grade" << endl;
+  cout << "[2] Remove a grade" << endl;
+  cout << "[#] Back\n" << endl;
 }
 
 void Student::publish() {
   ofstream gradebook;
   gradebook.open("gradebook.txt", ios::out | ios::app );
+  // double avg = 0;
+  // avg += avg_grade;
   gradebook << fname << "," << lname << "," << hometown << "," << homestate << "," << age << "," << avg_grade << ",";
   Student::pubGrades(gradebook);
   gradebook << endl;
@@ -200,10 +230,12 @@ void Student::publish() {
 
 void Student::pubGrades(ofstream &gradebook) {
   const int grade_count = grades.size();
-  for (int j=0; j < grade_count-1; j++) {
-    gradebook << grades[j] << ",";
+  if (grade_count > 0) {
+    for (int j=0; j < grade_count-1; j++) {
+      gradebook << grades[j] << ",";
+    }
+    gradebook << grades[grade_count-1];
   }
-  gradebook << grades[grade_count-1];
 }
 
 void Student::printInfo() {
@@ -216,6 +248,7 @@ void Student::printInfo() {
 
 void Student::addGrade() {
   string g;
+  cout << "\nType '#' to quit\n" << endl;
   while (g != "#") {
     cout << "Enter Grade: ";
     cin >> g;
@@ -223,7 +256,22 @@ void Student::addGrade() {
       grades.push_back(stoi(g));
   }
   cout << "Task completed." << endl;
-  cout << "\nNew Average: " << getAvg(grades) << endl;
+  avg_grade = getAvg(grades);
+  cout << "\nNew Average: " << avg_grade << endl;
+}
+
+void Student::removeGrade() {
+  int index, grade_count=grades.size();
+  listGrades();
+  if (grade_count > 0) {
+    cout << "Which grade would you like to remove? ";
+    cin >> index;
+    grades.erase(grades.begin() + index - 1);
+    cout << "\nGrade removed.\n" << endl;
+    listGrades();
+  } else {
+    cout << "\nNo grades to remove.\n" << endl;
+  }
 }
 
 double Student::getAvg(vector<int> avg) {
@@ -256,8 +304,10 @@ void GradeManager::parseStudentInfo(string line, Student *s1) {
     for (int i = 6; i < studentInfo.size(); i++) {
       grades.push_back(stoi(studentInfo[i]));
     }
-    if (gradeCount > 0)
+    if (gradeCount > 0) {
       s1->grades = grades;
+      s1->avg_grade = s1->getAvg(grades);
+    }
   }
 }
 
