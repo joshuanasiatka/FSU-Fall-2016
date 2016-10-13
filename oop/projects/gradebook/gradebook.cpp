@@ -9,12 +9,8 @@
  * Version: 2016.10.12.1
  *
  * TO-DO:
- * - Select Student [done]
- * - Add Grade [done]
- * - Average Grades [done]
- * - Print Student Report (full details, grades, average) [done]
- * - Delete Student
- * - Delete Grade
+ * - Delete student
+ * - Sorting records
  *
  * Copyright (C) 2016 Joshua Nasiatka.
  *--------------------------------------------------------------------------------------
