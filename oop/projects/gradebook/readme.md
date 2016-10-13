@@ -4,17 +4,17 @@
 in a `gradebook.txt` file. Upon re-executing the program, import the information from that text file.*
 
 **Filename:** [gradebook.cpp](gradebook.cpp)  
-**Version:** 2016.10.07.2
+**Version:** 2016.10.12.1
 
 **To-Do:**
 - Sort records
 - Delete student
-- Delete grade
 
 **Completed:**
 - Add Student
 - Select Student
 - Add Grade
+- Delete grade
 - Average Grades
 - Print Student Report (full details, grades, average)
 - Import/Export
