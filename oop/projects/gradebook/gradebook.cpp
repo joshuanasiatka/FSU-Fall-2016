@@ -3,7 +3,7 @@
  *
  * Using classes, handle students, their information, and their scores, and organize
  * that information in a tabular format, sortable and everything. Store that information
- * in a gradebook.txt file. Upon re-executing the program, import the information
+ * in a gradebook.csv file. Upon re-executing the program, import the information
  * from that text file.
  *
  * Version: 2016.10.12.1
@@ -125,7 +125,7 @@ int main() {
       cout << endl << "Successfully added 1 record." << endl;
     } else if (choice == 4) {
       // Import Gradebook
-      ifstream oldGradebook("gradebook.txt");
+      ifstream oldGradebook("gradebook.csv");
       if (!oldGradebook)
         cout << "No saved gradebooks." << endl;
       else {
@@ -215,7 +215,7 @@ void Student::printReportMenu() {
 
 void Student::publish() {
   ofstream gradebook;
-  gradebook.open("gradebook.txt", ios::out | ios::app );
+  gradebook.open("gradebook.csv", ios::out | ios::app );
   // double avg = 0;
   // avg += avg_grade;
   gradebook << fname << "," << lname << "," << hometown << "," << homestate << "," << age << "," << avg_grade << ",";
@@ -311,7 +311,7 @@ void GradeManager::parseStudentInfo(string line, Student *s1) {
 void printInfo() {
   cout << "----------------------" << endl;
   cout << "GradeBook Manager" << endl;
-  cout << "Updated 2016.09.27" << endl;
+  cout << "Updated 2016.10.12" << endl;
   cout << "Joshua Nasiatka" << endl;
   cout << "----------------------" << endl;
   cout << endl;
@@ -322,8 +322,8 @@ void saveGradebook(vector<Student> students) {
   const int studentCount = students.size();
 
   ofstream newGradebook;
-  newGradebook.open("gradebook.txt");
-  newGradebook << "fname,lname,hometown,homestate,age,avg_grade" << endl;
+  newGradebook.open("gradebook.csv");
+  newGradebook << "fname,lname,hometown,homestate,age,avg_grade,grades" << endl;
   newGradebook.close();
 
   for (int i = 0; i < studentCount; i++) {
