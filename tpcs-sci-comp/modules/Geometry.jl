@@ -1,5 +1,5 @@
 module Geometry
-export Point, x_coord, y_coord, distance, Polygon, perimeter, printPolyAsTuples, plot, area
+export Point, x_coord, y_coord, distance, Polygon, perimeter, printPolyAsTuples, plot, area, isValid
 
 using Gadfly
 

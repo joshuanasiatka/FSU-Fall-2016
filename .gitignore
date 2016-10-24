@@ -2,3 +2,4 @@
 null
 .ipynb_checkpoints/
 testcode/
+__pycache__/

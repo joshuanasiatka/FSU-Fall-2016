@@ -5,6 +5,8 @@ Landing page for CSC 3500 course files and notes
 * Introduction to OOP
  * [BirthdayUnBirthday](projects/birthday)
  * [Swap Function w/ 3 chars](projects/swap3x)
+* Linked Lists
+ * [Python Version](projects/linked-lists/linked_list.py)
 * Vectors
  * [Least Common Subsequence](projects/lcs) (LCS)
 * First Object-Oriented Project
