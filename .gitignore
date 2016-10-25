@@ -3,3 +3,4 @@ null
 .ipynb_checkpoints/
 testcode/
 __pycache__/
+outfile.txt
