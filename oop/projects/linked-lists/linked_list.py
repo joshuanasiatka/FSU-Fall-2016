@@ -5,12 +5,11 @@
 
  Author: Joshua Nasiatka (2016)
  Description: Create and modify a singly linked list in Python
- Version: 2016.10.22.1
+ Version: 2016.10.22.2
 
  TO-DO:
  - Delete specific node
  - Insert at positon
- - Find in list
 """
 
 class node:
@@ -37,7 +36,24 @@ class linked_list:
             self.tail.next = current_node   #   create reference to the new tail
             self.tail = current_node        #   move the tail reference to the bottom
 
+    def search(self, data):
+        current_node = self.head
+        found = False
+        position = 0
+        print("Locating '" + str(data) + "' in linked list")
+        while current_node and found is False:
+            if current_node.data == data:
+                found = True
+            else:
+                current_node = current_node.next
+            position+=1
+        if current_node is None:
+            return "Query resulted in false, '" + str(data) + "' not found in list"
+        else:
+            return "Query resulted in true, found '" + str(data) + "' at position " + str(position)
+
     def output_list(self):
+        print("\nPrinting linked list references:")
         if self.head is not None:
            node = self.head
            while node.next is not None: # while next node is not null
@@ -64,8 +80,10 @@ list1.insert_node(4)
 list1.insert_node(5)
 list1.insert_node(3.14159265358979)
 print("[DONE]")
-print("\nPrinting linked list references:")
 list1.output_list()
+print(list1.search(4)+"\n")
+print(list1.search('are')+"\n")
+print(list1.search(7)+"\n")
 print("Emptying list...                 ", end="")
 list1.empty()
 print("[DONE]")

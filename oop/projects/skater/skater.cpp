@@ -24,11 +24,11 @@
 #include<string>
 using namespace std;
 
-const int  max_number_skaters = 7;
+const int max_number_skaters = 7;
 
 class Skater {
     public:
-        char first_name[15];
+        char first_name[15];  // Max first/last name char count is 15+1
         char last_name[15];
         double avg;
         double scores[10];
