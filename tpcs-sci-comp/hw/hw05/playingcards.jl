@@ -41,6 +41,12 @@ function print_hand(h::Hand)
 end
 
 ### Probability Functions
+function isAFullHouse(h::Hand)
+    # return true if the hand is a full house and false otherwise
+    card_ranks=sort(map(card_rank,h.cards))
+    return card_ranks[1]==card_ranks[2] && card_ranks[4]==card_ranks[5] && (card_ranks[2]==card_ranks[3] || card_ranks[3]==card_ranks[4]) && card_ranks[2]!=card_ranks[4]
+end
+
 function isAFlush(h::Hand)
     card_suits=sort(map(card_suit,h.cards))
     return card_suits[1]==card_suits[2] && card_suits[2]==card_suits[3] &&

@@ -111,10 +111,10 @@ function isATwoPair(h::Hand)
 end
 
 ## Probability Checker
-function getProbability(f::Function)
+function getProbability(trials::Int,f::Function)
     deck=collect(1:52);
     numhands=0;
-    trials = 1000000
+    # trials = 1000000
     for i=1:trials
         shuffle!(deck)
         h = Hand(map(Card,deck[1:5]))
