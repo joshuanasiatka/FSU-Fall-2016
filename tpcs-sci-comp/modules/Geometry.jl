@@ -1,5 +1,5 @@
 module Geometry
-export Point, x_coord, y_coord, distance, Polygon, perimeter, printPolyAsTuples, plot, area, isValid
+export Point, x_coord, y_coord, distance, Polygon, perimeter, printPolyAsTuples, plot, area, isValid, rectangle
 
 using Gadfly
 
@@ -30,7 +30,7 @@ end
 
 type Polygon
     points::Array{Point,1}
-    Polygon(p::Array{Point,1})=new(p)
+    Polygon(p::Array{Point,1})=length(p)>2?new(p):throw(ArgumentError("Invalid Polygon. Must be 3 or more points."))
 end
 
 function __perimeter(poly::Polygon)
@@ -90,9 +90,9 @@ function isValid(poly::Polygon)
 end
 
 function plot(poly::Polygon)
-    isValid(poly)
-    ptsX = map(x_coord, poly.points)
-    ptsY = map(y_coord, poly.points)
+    pts,pts_size=isValid(poly)
+    ptsX = map(x_coord, pts)
+    ptsY = map(y_coord, pts)
     ptsA = [ptsX ptsY]
     Gadfly.plot(x=ptsX, y=ptsY, Geom.polygon, dark_theme)
 end
@@ -106,6 +106,26 @@ function area(poly::Polygon)
     end
 
     abs(area/2)
+end
+
+function rectangle(poly::Polygon)
+    pts,pts_size=isValid(poly)
+    pts_size==4||throw(ArgumentError("A rectangle as four points, that does not."))
+    Ax=pts[1].x;   Ay=pts[1].y;
+    Bx=pts[2].x;   By=pts[2].y;
+    Cx=pts[3].x;   Cy=pts[3].y;
+    Dx=pts[4].x;   Dy=pts[4].y;
+    (((Ax==Dx)&&(Ay==By)&&(Bx==Cx)&&(Cy==Dy))  ||
+     ((Ax==Bx)&&(Ay==Dy)&&(By==Cy)&&(Cx==Dx))) || throw(ErrorException("Sorry. Not a rectangle."))
+    ### Original Attempt
+    # AB=distance(A,B)
+    # BC=distance(B,C)
+    # CD=distance(C,D)
+    # DA=distance(D,A)
+    # AC=distance(A,C)
+    # BD=distance(B,D)
+    # ((AB==CD&&BC==DA)&&(AC==BD)&&())||throw(ErrorException("Sorry. Not a rectangle."))
+    ###
 end
 
 end
