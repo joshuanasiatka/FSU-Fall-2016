@@ -7,8 +7,9 @@ Landing page for CSC 3500 course files and notes
  * [Swap Function w/ 3 chars](projects/swap3x)
 * Linked Lists
  * [Python Version](projects/linked-lists/linked_list.py)
- * [C++ Version](projects/skater) with a Figure Skater theme
 * Vectors
  * [Least Common Subsequence](projects/lcs) (LCS)
-* First Object-Oriented Project
- * [Gradebook](projects/gradebook)
+* Projects
+ * [Vectors](projects/skater) with a Figure Skater theme
+ * [Gradebook](projects/gradebook) - Vector Version
+ * [Gradebook](projects/linked-lists/gradebook.py) - Linked-list Version (undergoing development)
