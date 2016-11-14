@@ -1,0 +1,118 @@
+{
+   "destination_addresses" : [ "Fitchburg, MA 01420, USA", "Boston, MA, USA", "New York, NY, USA" ],
+   "origin_addresses" : [ "Fitchburg, MA 01420, USA", "Boston, MA, USA", "New York, NY, USA" ],
+   "rows" : [
+      {
+         "elements" : [
+            {
+               "distance" : {
+                  "text" : "1 ft",
+                  "value" : 0
+               },
+               "duration" : {
+                  "text" : "1 min",
+                  "value" : 0
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "52.9 mi",
+                  "value" : 85137
+               },
+               "duration" : {
+                  "text" : "1 hour 8 mins",
+                  "value" : 4102
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "204 mi",
+                  "value" : 328495
+               },
+               "duration" : {
+                  "text" : "3 hours 34 mins",
+                  "value" : 12864
+               },
+               "status" : "OK"
+            }
+         ]
+      },
+      {
+         "elements" : [
+            {
+               "distance" : {
+                  "text" : "47.1 mi",
+                  "value" : 75726
+               },
+               "duration" : {
+                  "text" : "1 hour 6 mins",
+                  "value" : 3981
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "1 ft",
+                  "value" : 0
+               },
+               "duration" : {
+                  "text" : "1 min",
+                  "value" : 0
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "215 mi",
+                  "value" : 346648
+               },
+               "duration" : {
+                  "text" : "3 hours 43 mins",
+                  "value" : 13379
+               },
+               "status" : "OK"
+            }
+         ]
+      },
+      {
+         "elements" : [
+            {
+               "distance" : {
+                  "text" : "203 mi",
+                  "value" : 326394
+               },
+               "duration" : {
+                  "text" : "3 hours 29 mins",
+                  "value" : 12565
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "215 mi",
+                  "value" : 346499
+               },
+               "duration" : {
+                  "text" : "3 hours 39 mins",
+                  "value" : 13153
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "1 ft",
+                  "value" : 0
+               },
+               "duration" : {
+                  "text" : "1 min",
+                  "value" : 0
+               },
+               "status" : "OK"
+            }
+         ]
+      }
+   ],
+   "status" : "OK"
+}
