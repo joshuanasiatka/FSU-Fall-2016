@@ -1,0 +1,126 @@
+{
+   "destination_addresses" : [
+      "2 Merriam Ave, Leominster, MA 01453, USA",
+      "Commercial Rd & Haws St, Leominster, MA 01453, USA",
+      "45 Sack Blvd, Leominster, MA 01453, USA"
+   ],
+   "origin_addresses" : [
+      "2 Merriam Ave, Leominster, MA 01453, USA",
+      "Commercial Rd & Haws St, Leominster, MA 01453, USA",
+      "45 Sack Blvd, Leominster, MA 01453, USA"
+   ],
+   "rows" : [
+      {
+         "elements" : [
+            {
+               "distance" : {
+                  "text" : "1 ft",
+                  "value" : 0
+               },
+               "duration" : {
+                  "text" : "1 min",
+                  "value" : 0
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "1.2 mi",
+                  "value" : 1924
+               },
+               "duration" : {
+                  "text" : "4 mins",
+                  "value" : 258
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "1.0 mi",
+                  "value" : 1662
+               },
+               "duration" : {
+                  "text" : "5 mins",
+                  "value" : 278
+               },
+               "status" : "OK"
+            }
+         ]
+      },
+      {
+         "elements" : [
+            {
+               "distance" : {
+                  "text" : "1.1 mi",
+                  "value" : 1771
+               },
+               "duration" : {
+                  "text" : "3 mins",
+                  "value" : 205
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "1 ft",
+                  "value" : 0
+               },
+               "duration" : {
+                  "text" : "1 min",
+                  "value" : 0
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "0.4 mi",
+                  "value" : 616
+               },
+               "duration" : {
+                  "text" : "2 mins",
+                  "value" : 112
+               },
+               "status" : "OK"
+            }
+         ]
+      },
+      {
+         "elements" : [
+            {
+               "distance" : {
+                  "text" : "1.0 mi",
+                  "value" : 1628
+               },
+               "duration" : {
+                  "text" : "4 mins",
+                  "value" : 234
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "0.4 mi",
+                  "value" : 616
+               },
+               "duration" : {
+                  "text" : "3 mins",
+                  "value" : 174
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "1 ft",
+                  "value" : 0
+               },
+               "duration" : {
+                  "text" : "1 min",
+                  "value" : 0
+               },
+               "status" : "OK"
+            }
+         ]
+      }
+   ],
+   "status" : "OK"
+}

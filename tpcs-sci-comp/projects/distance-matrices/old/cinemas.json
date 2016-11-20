@@ -1,0 +1,156 @@
+{
+   "destination_addresses" : [
+      "Main Street & North Street, Fitchburg, MA 01420, USA",
+      "Lunenburg St & John Fitch Hwy, Fitchburg, MA 01420, USA",
+      "Laurel St & South St, Fitchburg, MA 01420, USA",
+      "South St & Wanoosnoc Rd, Fitchburg, MA 01420, USA",
+      "Water St & Bemis Rd, Fitchburg, MA 01420, USA",
+      "John Fitch Hwy & Summer St, Fitchburg, MA 01420, USA",
+      "Main St & North St, Leominster, MA 01453, USA",
+      "Main Street & Prospect St, Fitchburg, MA 01420, USA",
+      "US-2 & N Main St, Lancaster, NH 03584, USA",
+      "2 Merriam Ave, Leominster, MA 01453, USA",
+      "Commercial Rd & Haws St, Leominster, MA 01453, USA",
+      "45 Sack Blvd, Leominster, MA 01453, USA"
+   ],
+   "origin_addresses" : [ "160 Pearl St, Fitchburg, MA 01420, USA" ],
+   "rows" : [
+      {
+         "elements" : [
+            {
+               "distance" : {
+                  "text" : "0.5 mi",
+                  "value" : 761
+               },
+               "duration" : {
+                  "text" : "2 mins",
+                  "value" : 116
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "0.7 mi",
+                  "value" : 1119
+               },
+               "duration" : {
+                  "text" : "2 mins",
+                  "value" : 148
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "0.8 mi",
+                  "value" : 1283
+               },
+               "duration" : {
+                  "text" : "3 mins",
+                  "value" : 168
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "2.6 mi",
+                  "value" : 4118
+               },
+               "duration" : {
+                  "text" : "7 mins",
+                  "value" : 411
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "2.4 mi",
+                  "value" : 3787
+               },
+               "duration" : {
+                  "text" : "7 mins",
+                  "value" : 440
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "1.8 mi",
+                  "value" : 2857
+               },
+               "duration" : {
+                  "text" : "5 mins",
+                  "value" : 324
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "3.4 mi",
+                  "value" : 5462
+               },
+               "duration" : {
+                  "text" : "9 mins",
+                  "value" : 534
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "1.2 mi",
+                  "value" : 1887
+               },
+               "duration" : {
+                  "text" : "4 mins",
+                  "value" : 269
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "155 mi",
+                  "value" : 248997
+               },
+               "duration" : {
+                  "text" : "2 hours 51 mins",
+                  "value" : 10273
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "5.1 mi",
+                  "value" : 8271
+               },
+               "duration" : {
+                  "text" : "15 mins",
+                  "value" : 927
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "5.9 mi",
+                  "value" : 9424
+               },
+               "duration" : {
+                  "text" : "12 mins",
+                  "value" : 740
+               },
+               "status" : "OK"
+            },
+            {
+               "distance" : {
+                  "text" : "6.2 mi",
+                  "value" : 10040
+               },
+               "duration" : {
+                  "text" : "14 mins",
+                  "value" : 852
+               },
+               "status" : "OK"
+            }
+         ]
+      }
+   ],
+   "status" : "OK"
+}
