@@ -49,7 +49,7 @@ function run_TSP(filename::String)
     local min_distance = findmin(permutations)
     local that_path = map(x->file["destination_addresses"][x],nthperm(collect(1:length(file["rows"])),min_distance[2]))
     push!(that_path,that_path[1])
-    print("The Shortest Distance and Position is: ", min_distance, "\n")
+    print("The Shortest Distance and Position is: ", min_distance)
     # print("Which translates to: ", min_distance[1]*0.000621371, " miles.")
     print("\n\nThe path of which is: \n", that_path)
     return min_distance, that_path, dist_map
@@ -125,11 +125,13 @@ South Street and Laurel Street (Fitchburg)|
 South Street and Wanoosnoc Rd (Fitchburg)|
 Water Street and Bemis Rd (Fitchburg)|
 Summer Street and John Fitch Hwy (Fitchburg)|
-North Street and Main Street (Lunenburg)|
-Main Street and Prospect Street (Lunenburg)|
-N. Main Street and Rte 2 (Lunenburg MA)
+North Street and Main Street (Leominster)|
+Main Street and Prospect Street (Leominster)|
+N. Main Street and Rte 2 (Leominster MA)
 
-Merriam Ave and Rte 2 (Lunenburg)|
-Haws Street and Commercial Road (Lunenburg)|
+Merriam Ave and Rte 2 (Leominster)|
+Haws Street and Commercial Road (Leominster)|
+Main St and Mill St (Leominster)|
+Mill St and Cinema Blvd (Leominster)|
 45 Sack Blvd, Leominster, MA 01453
 =#
