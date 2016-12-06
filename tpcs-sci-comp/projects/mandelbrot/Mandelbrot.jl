@@ -1,6 +1,6 @@
 module Mandelbrot
 
-export MandelbrotView, newton, iterate
+export MandelbrotView, newton, iterate, is_in_mbset, leaving_number, plot
 
 type MandelbrotView
   min::Number
@@ -22,43 +22,40 @@ function newton(f,df,x0)
   return x
 end
 
-#=
-function iterate(x::Number,c::Complex=im,n::Int64=10)
-  local x0 = x
-  local iters = []
-  local err = "No error defined."
-  for i=1:n
-    x0 = x0^2+c
-    # println("($(x0))^2+$(c) = $(x0^2+c)")
-    if abs(x0^2) > 2
-      err = "Not bounded."
-      return n-1
+function iterate(z::Number,iter::Int64=255)
+  local c = z
+  local leaving = iter
+  local arr=[]
+  local lnum = 255
+  # err = "No defined error."
+  for n = 1:leaving
+    if abs(z) > 2
+      # err = "Not bounded."
+      lnum = n
+      return arr, lnum
     else
-      err  = "Series is bounded."
+      lnum = 255
     end
-    push!(iters,x0)
+    z = z^2 + c
+    push!(arr,z)
   end
-  println(err)
-  return iters
+  # println(err)
+  return arr, lnum
 end
-=#
 
-function iterate(z::Number,iter::Int64=10)
-    local c = z
-    local maxiter = iter
-    local arr=[]
-    err = "No defined error."
-    for n = 1:maxiter
-        if abs(z) > 2
-          err = "Not bounded."
-        else
-          err  = "Series is bounded."
-        end
-        z = z^2 + c
-        push!(arr,z)
-    end
-    println(err)
-    return arr
+function is_in_mbset(c::Complex)
+  local mb = iterate(c)
+  return mb[2] == 255
+end
+
+function leaving_number(c::Complex,iter::Int64=10,ipoint::Complex=0+0im)
+  local out = iterate(c,iter);
+  return out[2]
+end
+
+function plot(m::MandelbrotView,scale::Int64=1)
+  local height = 300
+  local width = 400
 end
 
 end
