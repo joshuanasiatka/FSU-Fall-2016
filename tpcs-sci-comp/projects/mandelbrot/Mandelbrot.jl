@@ -2,6 +2,8 @@ module Mandelbrot
 
 export MandelbrotView, newton, iterate, is_in_mbset, leaving_number, plot
 
+using Images, Colors, ImageView
+
 type MandelbrotView
   min::Number
   max::Number
@@ -25,12 +27,11 @@ end
 function iterate(z::Number,iter::Int64=255)
   local c = z
   local leaving = iter
-  local arr=[]
+  local arr=Complex[]
   local lnum = 255
-  # err = "No defined error."
   for n = 1:leaving
+    c = z
     if abs(z) > 2
-      # err = "Not bounded."
       lnum = n
       return arr, lnum
     else
@@ -39,7 +40,6 @@ function iterate(z::Number,iter::Int64=255)
     z = z^2 + c
     push!(arr,z)
   end
-  # println(err)
   return arr, lnum
 end
 
@@ -53,9 +53,13 @@ function leaving_number(c::Complex,iter::Int64=10,ipoint::Complex=0+0im)
   return out[2]
 end
 
-function plot(m::MandelbrotView,scale::Int64=1)
-  local height = 300
-  local width = 400
+function plot(m::MandelbrotView,scale::Number=1)
+  local height = 400*scale
+  local width = 600*scale
+  local z=[(x+y*im) for x=-2:3/(height-1):1, y=1:-2/(width-1):-1]
+  local y=map(x->leaving_number(x),z)
+  y=map(x->UInt8(x),y)
+  return ImageCmap(y,colormap("RdBu",256))
 end
 
 end
