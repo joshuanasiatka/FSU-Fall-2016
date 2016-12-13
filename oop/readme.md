@@ -1,6 +1,8 @@
 # Object-Oriented Programming (CSC 3500)
 Landing page for CSC 3500 course files and notes
 
+More projects and documentation for this course is available [here](https://ref.bitcraftlabs.net/?page=/Object-Oriented/000An_Introduction.md)
+
 **Projects:**  
 * Introduction to OOP
  * [BirthdayUnBirthday](projects/birthday)
